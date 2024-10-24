@@ -68,3 +68,35 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+// README.md
+
+# QR Code Generator
+
+A simple QR Code Generator built with React and Material UI. This application allows users to generate, download, and scan QR codes for any text or URL.
+
+## Features
+
+- Generate QR codes from user-inputted text or URLs
+- Download the generated QR code as a PNG image
+- Responsive design using Material UI
+
+## Technologies Used
+
+- React
+- Material UI
+- QRCode library for generating QR codes
+
+## Getting Started
+
+### Prerequisites
+
+Make sure you have Node.js and npm installed on your machine. You can download it from [Node.js official website](https://nodejs.org/).
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/kaibad/QrGeneratorReact.git
+   ```

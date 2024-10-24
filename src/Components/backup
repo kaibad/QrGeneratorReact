@@ -1,0 +1,128 @@
+import React, { useState } from "react";
+import {
+  Container,
+  Card,
+  CardContent,
+  Grid,
+  TextField,
+  Button,
+} from "@mui/material";
+import QRcode from "qrcode";
+import Footer from "./Components/Footer";
+
+function App() {
+  const [text, setText] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+
+  const generateQrCode = async () => {
+    if (!text) {
+      alert("Please enter some text.");
+      return;
+    }
+
+    let formattedText = text;
+
+    // Automatically add protocol if missing
+    if (!/^https?:\/\//i.test(text)) {
+      // Default to http:// if no protocol is provided
+      formattedText = `http://${text}`;
+    }
+
+    try {
+      const response = await QRcode.toDataURL(formattedText);
+      setImageUrl(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getFileName = () => {
+    return text ? text.replace(/\W+/g, "-").substring(0, 15) : "qrcode"; // Fallback filename
+  };
+
+  return (
+    <>
+      <Container sx={{ mt: 2 }}>
+        <Card>
+          <h2
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              background: "#e00000",
+              color: "white",
+              padding: "16px",
+              marginBottom: "16px",
+            }}
+          >
+            Generate, Download & Scan QR
+          </h2>
+          <CardContent>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={12} sm={10}>
+                <TextField
+                  label="Enter text or URL"
+                  variant="outlined"
+                  fullWidth
+                  onChange={(e) => setText(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={2}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  onClick={generateQrCode}
+                >
+                  Generate
+                </Button>
+              </Grid>
+            </Grid>
+
+            {imageUrl && (
+              <Grid container justifyContent="center">
+                <Grid item>
+                  <img
+                    src={imageUrl}
+                    alt="QR Code"
+                    style={{
+                      display: "block",
+                      margin: "20px auto",
+                      maxWidth: "100%",
+                      height: "auto",
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            )}
+
+            {imageUrl && (
+              <Grid container justifyContent="center" marginTop={2}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    fullWidth
+                    onClick={() => {
+                      const link = document.createElement("a");
+                      link.href = imageUrl;
+                      link.setAttribute("download", `${getFileName()}.png`);
+                      document.body.appendChild(link);
+                      link.click();
+                      document.body.removeChild(link);
+                    }}
+                  >
+                    Download
+                  </Button>
+                </Grid>
+              </Grid>
+            )}
+          </CardContent>
+        </Card>
+      </Container>
+      <Footer /> {/* Footer moved outside the container */}
+    </>
+  );
+}
+
+export default App;
