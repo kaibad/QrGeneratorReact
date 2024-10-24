@@ -69,7 +69,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-// README.md
 
 # QR Code Generator
 
@@ -92,6 +91,9 @@ A simple QR Code Generator built with React and Material UI. This application al
 ### Prerequisites
 
 Make sure you have Node.js and npm installed on your machine. You can download it from [Node.js official website](https://nodejs.org/).
+
+### View the Result
+[View](https://generate-qr-kb.netlify.app/)
 
 ### Installation
 
